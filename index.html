@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tasty things.</title>
     <style>
-        /* 1. 디자인 컨셉 설정 */
         :root {
             --bg-color: #ffffff;
             --card-bg: #ffffff;
@@ -13,132 +12,48 @@
             --text-sub: #888888;
             --tag-bg: #f4f4f4;
             --accent: #000000;
+            --overlay: rgba(0, 0, 0, 0.8);
         }
 
         body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            font-family: 'Pretendard', -apple-system, sans-serif;
             background-color: var(--bg-color);
-            margin: 0;
-            padding: 20px;
-            color: var(--text-main);
+            margin: 0; padding: 20px; color: var(--text-main);
             line-height: 1.6;
         }
 
-        /* 2. 헤더 및 검색창 */
-        header {
-            max-width: 1200px;
-            margin: 60px auto 40px;
-            text-align: center;
-        }
+        /* 헤더 & 검색 */
+        header { max-width: 1200px; margin: 60px auto 40px; text-align: center; }
+        h1 { font-size: 3.5rem; font-weight: 900; letter-spacing: -2px; margin-bottom: 30px; text-transform: lowercase; }
+        .search-bar { padding: 15px 25px; border: 1px solid #eeeeee; border-radius: 50px; width: 100%; max-width: 400px; outline: none; }
 
-        h1 {
-            font-size: 3.5rem;
-            font-weight: 900;
-            letter-spacing: -2px;
-            margin-bottom: 30px;
-            /* 세련된 소문자 타이틀 */
-            text-transform: lowercase; 
-        }
+        /* 레이아웃 */
+        .archive-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto; }
+        .column-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 30px; padding-bottom: 10px; border-bottom: 2px solid #000; text-transform: uppercase; }
 
-        .search-container {
-            margin-bottom: 60px;
-        }
+        /* 카드 (클릭 가능하도록 커서 추가) */
+        .card { background: var(--card-bg); margin-bottom: 40px; cursor: pointer; transition: opacity 0.2s; }
+        .card:hover { opacity: 0.8; }
+        .card-img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background-color: #f9f9f9; margin-bottom: 15px; }
+        .card-title { font-size: 1.1rem; font-weight: 700; margin: 0 0 10px 0; }
+        .card-desc { font-size: 0.95rem; color: var(--text-sub); margin-bottom: 15px; }
+        .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .tag { font-size: 0.75rem; background: var(--tag-bg); padding: 4px 12px; border-radius: 4px; color: #555; }
 
-        .search-bar {
-            padding: 15px 25px;
-            border: 1px solid #eeeeee;
-            border-radius: 50px;
-            width: 100%;
-            max-width: 400px;
-            font-size: 1rem;
-            outline: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.02);
+        /* 모달 팝업 스타일 */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--overlay); z-index: 1000; justify-content: center; align-items: center;
+            padding: 20px;
         }
+        .modal-content {
+            background: white; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto;
+            padding: 40px; border-radius: 0; position: relative;
+        }
+        .close-modal { position: absolute; top: 20px; right: 20px; font-size: 1.5rem; cursor: pointer; border: none; background: none; }
+        .recipe-text { white-space: pre-wrap; margin-top: 20px; color: #333; line-height: 1.8; }
 
-        .search-bar:focus {
-            border-color: #ddd;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-        }
-
-        /* 3. 3열 레이아웃 (Padlet Style) */
-        .archive-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .column-title {
-            font-size: 1.2rem;
-            font-weight: 800;
-            margin-bottom: 30px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #000;
-            text-transform: uppercase;
-            display: inline-block;
-        }
-
-        /* 4. 카드 스타일 */
-        .card {
-            background: var(--card-bg);
-            border-radius: 0px; /* 각진 스타일이 더 세련되어 보일 때가 있습니다 */
-            margin-bottom: 40px;
-            transition: all 0.3s ease;
-            animation: fadeIn 0.6s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .card-img {
-            width: 100%;
-            aspect-ratio: 4 / 5; /* 세로가 약간 긴 잡지 비율 */
-            object-fit: cover;
-            background-color: #f9f9f9;
-            margin-bottom: 15px;
-        }
-
-        .card-content {
-            padding: 5px 0;
-        }
-
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin: 0 0 10px 0;
-        }
-
-        .card-desc {
-            font-size: 0.95rem;
-            color: var(--text-sub);
-            margin-bottom: 15px;
-        }
-
-        /* 5. 태그 */
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .tag {
-            font-size: 0.75rem;
-            background: var(--tag-bg);
-            padding: 4px 12px;
-            border-radius: 4px;
-            color: #555;
-            font-weight: 500;
-        }
-
-        /* 반응형 모바일 설정 */
-        @media (max-width: 900px) {
-            .archive-container { grid-template-columns: 1fr; }
-            h1 { font-size: 2.5rem; }
-        }
+        @media (max-width: 900px) { .archive-container { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -151,90 +66,95 @@
 </header>
 
 <div class="archive-container">
-    <div class="column" id="cooking-col">
-        <div class="column-title">Cooking</div>
-        <div class="items"></div>
-    </div>
-    
-    <div class="column" id="travel-col">
-        <div class="column-title">Travel</div>
-        <div class="items"></div>
-    </div>
-    
-    <div class="column" id="space-col">
-        <div class="column-title">Space</div>
-        <div class="items"></div>
+    <div class="column" id="cooking-col"><div class="column-title">Cooking</div><div class="items"></div></div>
+    <div class="column" id="travel-col"><div class="column-title">Travel</div><div class="items"></div></div>
+    <div class="column" id="space-col"><div class="column-title">Space</div><div class="items"></div></div>
+</div>
+
+<div id="recipeModal" class="modal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <button class="close-modal" onclick="closeModal()">&times;</button>
+        <h2 id="modalTitle"></h2>
+        <div id="modalRecipe" class="recipe-text"></div>
     </div>
 </div>
 
 <script>
-    /* 6. 데이터 업데이트 방법 
-       새로운 내용을 추가하려면 아래 [ ] 사이에 가장 윗줄에 추가하세요.
-    */
     const posts = [
         {
-            category: 'space',
-            title: '무채색의 공간 감각',
-            desc: '조명 하나로 바뀌는 거실의 분위기.',
-            img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=600',
-            tags: ['#Interior', '#Lighting']
+            category: 'cooking',
+            title: '보들보들 감자스프',
+            desc: '비 오는 날 생각나는 따뜻하고 고소한 맛.',
+            img: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=600',
+            tags: ['#PotatoSoup', '#Recipe'],
+            recipe: "1. 감자 3개를 삶아 으깹니다.\n2. 볶은 양파와 함께 블렌더에 넣습니다.\n3. 우유 200ml와 생크림 100ml를 넣고 끓입니다.\n4. 소금, 후추로 간을 맞추면 완성!"
+        },
+        {
+            category: 'cooking',
+            title: '프렌치 어니언 스프',
+            desc: '양파를 카라멜라이징하는 인내의 시간.',
+            img: 'https://images.unsplash.com/photo-1583032015879-e50d22792c90?auto=format&fit=crop&w=600',
+            tags: ['#FrenchOnion', '#Classic'],
+            recipe: "1. 양파 4개를 채 썰어 버터에 갈색이 될 때까지 볶습니다 (약 40분).\n2. 화이트 와인 조금과 비프 스톡을 넣고 끓입니다.\n3. 바게트 빵과 그뤼에르 치즈를 올려 오븐에 굽습니다."
+        },
+        {
+            category: 'cooking',
+            title: '엄마표 김치찌개',
+            desc: '잘 익은 김치와 돼지고기의 완벽한 조화.',
+            img: 'https://images.unsplash.com/photo-1620311510495-9eaf835d71f9?auto=format&fit=crop&w=600',
+            tags: ['#KoreanFood', '#Kimchi'],
+            recipe: "1. 돼지고기를 먼저 볶다가 김치를 넣고 충분히 볶습니다.\n2. 쌀뜨물을 붓고 푹 끓입니다.\n3. 고춧가루, 간장, 다진 마늘로 간을 합니다.\n4. 마지막에 두부와 파를 넣습니다."
         },
         {
             category: 'travel',
             title: '포르투의 붉은 지붕',
-            desc: '강변에 앉아 바라보던 노을과 와인 한 잔.',
+            desc: '강변에 앉아 바라보던 노을.',
             img: 'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?auto=format&fit=crop&w=600',
             tags: ['#Porto', '#Sunset']
-        },
-        {
-            category: 'cooking',
-            title: '여름의 맛, 콜드 파스타',
-            desc: '상큼한 토마토와 발사믹 드레싱의 조화.',
-            img: 'https://images.unsplash.com/photo-1473093226795-af9932fe5855?auto=format&fit=crop&w=600',
-            tags: ['#SummerFood', '#Pasta']
         }
     ];
 
-    // 게시물을 화면에 그리는 함수
     function renderPosts() {
-        // 기존 내용 삭제
         document.querySelectorAll('.items').forEach(el => el.innerHTML = '');
-
-        // 데이터 순회 (최신순 업데이트를 위해 index 역순으로 넣어도 되지만, 여기서는 배열 순서대로 처리)
-        posts.forEach(post => {
+        posts.forEach((post, index) => {
             const cardHtml = `
-                <div class="card" data-search="${post.tags.join(' ')} ${post.title} ${post.category}">
+                <div class="card" onclick="openModal(${index})" data-search="${post.tags.join(' ')} ${post.title}">
                     <img src="${post.img}" class="card-img" alt="${post.title}">
                     <div class="card-content">
                         <h3 class="card-title">${post.title}</h3>
                         <p class="card-desc">${post.desc}</p>
-                        <div class="tags">
-                            ${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                        </div>
+                        <div class="tags">${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>
                     </div>
                 </div>
             `;
-            
-            const colId = `${post.category}-col`;
-            const container = document.querySelector(`#${colId} .items`);
-            
-            // 💡 중요: 새로운 데이터가 위로 올라오도록 (prepend 개념)
+            const container = document.querySelector(`#${post.category}-col .items`);
             container.insertAdjacentHTML('beforeend', cardHtml);
         });
     }
 
-    // 검색 기능
+    // 모달 제어 함수
+    function openModal(index) {
+        const post = posts[index];
+        if (!post.recipe) return; // 레시피가 없으면 열지 않음
+        
+        document.getElementById('modalTitle').innerText = post.title;
+        document.getElementById('modalRecipe').innerText = post.recipe;
+        document.getElementById('recipeModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('recipeModal').style.display = 'none';
+    }
+
     function filterPosts() {
         const query = document.getElementById('searchInput').value.toLowerCase();
         const cards = document.querySelectorAll('.card');
-        
         cards.forEach(card => {
             const content = card.getAttribute('data-search').toLowerCase();
             card.style.display = content.includes(query) ? 'block' : 'none';
         });
     }
 
-    // 페이지 로드 시 실행
     renderPosts();
 </script>
 
