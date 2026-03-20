@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Archive | 요리·여행·공간</title>
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-main: #222;
+            --text-sub: #666;
+            --tag-bg: #eee;
+            --accent: #333;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+            color: var(--text-main);
+        }
+
+        /* 상단 헤더 & 검색바 */
+        header {
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .search-bar {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            width: 250px;
+            outline: none;
+        }
+
+        /* 3열 레이아웃 구조 */
+        .archive-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .column-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 8px;
+        }
+
+        /* 카드 스타일 */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            background-color: #ddd;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 15px;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0 0 8px 0;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        /* 태그 스타일 */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            background: var(--tag-bg);
+            padding: 3px 8px;
+            border-radius: 4px;
+            color: var(--text-sub);
+        }
+
+        @media (max-width: 768px) {
+            .archive-container { grid-template-columns: 1fr; }
+            header { flex-direction: column; gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>ARCHIVE.</h1>
+    <input type="text" class="search-bar" placeholder="태그나 제목 검색...">
+</header>
+
+<div class="archive-container">
+    <div class="column">
+        <div class="column-title">Cooking</div>
+        
+        <div class="card">
+            <div class="card-img" style="background: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=500') center/cover;"></div>
+            <div class="card-content">
+                <h3 class="card-title">주말 브런치 레시피</h3>
+                <p class="card-desc">아보카도와 수란의 조합은 언제나 옳다. 플레이팅 영감.</p>
+                <div class="tags">
+                    <span class="tag">#Healthy</span> <span class="tag">#HomeCook</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="column-title">Travel</div>
+        
+        <div class="card">
+            <div class="card-img" style="background: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=500') center/cover;"></div>
+            <div class="card-content">
+                <h3 class="card-title">파리의 늦은 오후</h3>
+                <p class="card-desc">에펠탑이 보이는 마르스 광장에서의 피크닉 기억.</p>
+                <div class="tags">
+                    <span class="tag">#Paris</span> <span class="tag">#Picnic</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="column-title">Space</div>
+        
+        <div class="card">
+            <div class="card-img" style="background: url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=500') center/cover;"></div>
+            <div class="card-content">
+                <h3 class="card-title">미드센추리 모던 거실</h3>
+                <p class="card-desc">우드 톤과 오렌지 컬러 포인트의 조화가 인상적인 공간.</p>
+                <div class="tags">
+                    <span class="tag">#Interior</span> <span class="tag">#Vintage</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
