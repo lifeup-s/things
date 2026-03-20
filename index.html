@@ -3,95 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tasty Things</title>
+    <title>tasty things.</title>
     <style>
+        /* 1. 디자인 컨셉 설정 */
         :root {
-            --bg-color: #fcfcfc;
+            --bg-color: #ffffff;
             --card-bg: #ffffff;
-            --text-main: #1a1a1a;
-            --text-sub: #777;
-            --tag-bg: #f0f0f0;
-            --accent: #000;
+            --text-main: #000000;
+            --text-sub: #888888;
+            --tag-bg: #f4f4f4;
+            --accent: #000000;
         }
 
         body {
-            font-family: 'Pretendard', -apple-system, sans-serif;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
             background-color: var(--bg-color);
-            margin: 0; padding: 20px; color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            color: var(--text-main);
+            line-height: 1.6;
         }
 
-        /* 헤더 디자인 변경 */
+        /* 2. 헤더 및 검색창 */
         header {
             max-width: 1200px;
-            margin: 40px auto;
+            margin: 60px auto 40px;
             text-align: center;
         }
 
         h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            letter-spacing: -1px;
-            margin-bottom: 20px;
-            text-transform: lowercase; /* 세련된 느낌을 위해 소문자 처리 */
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 30px;
+            /* 세련된 소문자 타이틀 */
+            text-transform: lowercase; 
         }
 
         .search-container {
-            margin-bottom: 50px;
+            margin-bottom: 60px;
         }
 
         .search-bar {
-            padding: 12px 20px;
-            border: 1px solid #eee;
-            border-radius: 30px;
-            width: 300px;
-            font-size: 0.9rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            padding: 15px 25px;
+            border: 1px solid #eeeeee;
+            border-radius: 50px;
+            width: 100%;
+            max-width: 400px;
+            font-size: 1rem;
             outline: none;
             transition: all 0.3s ease;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.02);
         }
 
-        .search-bar:focus { width: 350px; border-color: #ccc; }
+        .search-bar:focus {
+            border-color: #ddd;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
 
-        /* 3열 레이아웃 */
+        /* 3. 3열 레이아웃 (Padlet Style) */
         .archive-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
+            gap: 40px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .column-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 25px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 30px;
             padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 2px solid #000;
+            text-transform: uppercase;
+            display: inline-block;
         }
 
-        /* 카드 애니메이션 추가 */
+        /* 4. 카드 스타일 */
         .card {
             background: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
-            margin-bottom: 25px;
-            animation: fadeIn 0.5s ease forwards;
+            border-radius: 0px; /* 각진 스타일이 더 세련되어 보일 때가 있습니다 */
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+            animation: fadeIn 0.6s ease forwards;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .card-img { width: 100%; height: 220px; object-fit: cover; background-color: #f9f9f9; }
-        .card-content { padding: 20px; }
-        .card-title { font-size: 1.05rem; font-weight: 600; margin: 0 0 10px 0; }
-        .card-desc { font-size: 0.9rem; color: var(--text-sub); line-height: 1.6; margin-bottom: 15px; }
-        .tags { display: flex; flex-wrap: wrap; gap: 6px; }
-        .tag { font-size: 0.7rem; background: var(--tag-bg); padding: 4px 10px; border-radius: 50px; color: var(--text-sub); font-weight: 500; }
+        .card-img {
+            width: 100%;
+            aspect-ratio: 4 / 5; /* 세로가 약간 긴 잡지 비율 */
+            object-fit: cover;
+            background-color: #f9f9f9;
+            margin-bottom: 15px;
+        }
 
-        @media (max-width: 900px) { .archive-container { grid-template-columns: 1fr; } }
+        .card-content {
+            padding: 5px 0;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 0 0 10px 0;
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            color: var(--text-sub);
+            margin-bottom: 15px;
+        }
+
+        /* 5. 태그 */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            background: var(--tag-bg);
+            padding: 4px 12px;
+            border-radius: 4px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        /* 반응형 모바일 설정 */
+        @media (max-width: 900px) {
+            .archive-container { grid-template-columns: 1fr; }
+            h1 { font-size: 2.5rem; }
+        }
     </style>
 </head>
 <body>
@@ -99,50 +146,64 @@
 <header>
     <h1>tasty things.</h1>
     <div class="search-container">
-        <input type="text" id="searchInput" class="search-bar" placeholder="태그나 제목으로 검색..." onkeyup="filterPosts()">
+        <input type="text" id="searchInput" class="search-bar" placeholder="영감 검색 (태그, 제목)..." onkeyup="filterPosts()">
     </div>
 </header>
 
 <div class="archive-container">
-    <div class="column" id="cooking-col"><div class="column-title">Cooking</div><div class="items"></div></div>
-    <div class="column" id="travel-col"><div class="column-title">Travel</div><div class="items"></div></div>
-    <div class="column" id="space-col"><div class="column-title">Space</div><div class="items"></div></div>
+    <div class="column" id="cooking-col">
+        <div class="column-title">Cooking</div>
+        <div class="items"></div>
+    </div>
+    
+    <div class="column" id="travel-col">
+        <div class="column-title">Travel</div>
+        <div class="items"></div>
+    </div>
+    
+    <div class="column" id="space-col">
+        <div class="column-title">Space</div>
+        <div class="items"></div>
+    </div>
 </div>
 
 <script>
-    // ★ 이 데이터 부분만 업데이트하면 됩니다! ★
-    // 가장 아래에 있는 것이 예전 것, 가장 위에 쓰는 것이 새것입니다.
+    /* 6. 데이터 업데이트 방법 
+       새로운 내용을 추가하려면 아래 [ ] 사이에 가장 윗줄에 추가하세요.
+    */
     const posts = [
         {
             category: 'space',
-            title: '미니멀리즘의 정석',
-            desc: '단순함이 주는 여백의 미를 느낄 수 있는 쇼룸.',
-            img: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=500',
-            tags: ['#Interior', '#Minimal']
+            title: '무채색의 공간 감각',
+            desc: '조명 하나로 바뀌는 거실의 분위기.',
+            img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=600',
+            tags: ['#Interior', '#Lighting']
         },
         {
             category: 'travel',
-            title: '교토의 아침 산책',
-            desc: '조용한 골목길에서 만난 작은 사원.',
-            img: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=500',
-            tags: ['#Kyoto', '#Travel']
+            title: '포르투의 붉은 지붕',
+            desc: '강변에 앉아 바라보던 노을과 와인 한 잔.',
+            img: 'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?auto=format&fit=crop&w=600',
+            tags: ['#Porto', '#Sunset']
         },
         {
             category: 'cooking',
-            title: '홈메이드 파스타',
-            desc: '바질 페스토를 곁들인 건강한 점심.',
-            img: 'https://images.unsplash.com/photo-1473093226795-af9932fe5856?auto=format&fit=crop&w=500',
-            tags: ['#Pasta', '#Healthy']
+            title: '여름의 맛, 콜드 파스타',
+            desc: '상큼한 토마토와 발사믹 드레싱의 조화.',
+            img: 'https://images.unsplash.com/photo-1473093226795-af9932fe5855?auto=format&fit=crop&w=600',
+            tags: ['#SummerFood', '#Pasta']
         }
     ];
 
+    // 게시물을 화면에 그리는 함수
     function renderPosts() {
-        // 컬럼 초기화
+        // 기존 내용 삭제
         document.querySelectorAll('.items').forEach(el => el.innerHTML = '');
 
+        // 데이터 순회 (최신순 업데이트를 위해 index 역순으로 넣어도 되지만, 여기서는 배열 순서대로 처리)
         posts.forEach(post => {
-            const card = `
-                <div class="card" data-tags="${post.tags.join(' ')} ${post.title}">
+            const cardHtml = `
+                <div class="card" data-search="${post.tags.join(' ')} ${post.title} ${post.category}">
                     <img src="${post.img}" class="card-img" alt="${post.title}">
                     <div class="card-content">
                         <h3 class="card-title">${post.title}</h3>
@@ -153,24 +214,27 @@
                     </div>
                 </div>
             `;
+            
             const colId = `${post.category}-col`;
             const container = document.querySelector(`#${colId} .items`);
-            // 맨 위에 추가되도록 innerHTML 앞에 붙임
-            container.innerHTML = card + container.innerHTML;
+            
+            // 💡 중요: 새로운 데이터가 위로 올라오도록 (prepend 개념)
+            container.insertAdjacentHTML('beforeend', cardHtml);
         });
     }
 
+    // 검색 기능
     function filterPosts() {
         const query = document.getElementById('searchInput').value.toLowerCase();
         const cards = document.querySelectorAll('.card');
         
         cards.forEach(card => {
-            const content = card.getAttribute('data-tags').toLowerCase();
+            const content = card.getAttribute('data-search').toLowerCase();
             card.style.display = content.includes(query) ? 'block' : 'none';
         });
     }
 
-    // 초기 실행
+    // 페이지 로드 시 실행
     renderPosts();
 </script>
 
